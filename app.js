@@ -1,12 +1,19 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const axios = require('axios');
+const app = express();
 
 // Routes
-app.get('/', function(req, res) {
-  res.send('Hello World!!');
+app.get('/', async function (req, res) {
+  const cityName = req.query.city;
+  const apiResponse = await axios.get("https://www.metaweather.com/api/location/search/", {
+    params: {
+      query: cityName
+    }
+  });
+  res.send(`Hello ${cityName}!`);
 });
 
 // Listen
-var port = process.env.PORT || 3000;
+var port = 80;
 app.listen(port);
-console.log('Listening on localhost:'+ port);
+console.log('Listening on localhost:' + port);
