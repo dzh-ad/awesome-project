@@ -13,6 +13,11 @@ app.get('/', async function (req, res) {
   res.send(`Hello ${cityName}!`);
 });
 
+app.get('/hello', (req, res) => {
+  const myName = req.query.name;  //add /hello?name=Amelia for "Hello Amelia!"
+  res.send(`Hello ${myName}`);
+});
+
 // Listen
 var port = 80;
 app.listen(port);
