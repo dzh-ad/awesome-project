@@ -8,13 +8,15 @@ app.get('/', async function (req, res) {
   const apiResponse = await axios.get("https://www.metaweather.com/api/location/search/", {
     params: {
       query: cityName
-    }
+    },
   });
-  res.send(`Hello ${cityName}!`);
+  const id = apiResponse.data[0].woeid;
+
+  res.send(`Hello ${cityName}! The woeid is ${id}.`);
 });
 
 app.get('/hello', (req, res) => {
-  const myName = req.query.name;  //add /hello?name=Amelia for "Hello Amelia!"
+  const myName = req.query.name;  // add /hello?name=Amelia for "Hello Amelia!"
   res.send(`Hello ${myName}`);
 });
 
